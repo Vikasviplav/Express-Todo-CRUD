@@ -10,7 +10,7 @@ const todos = new Todos();
 
 const port = process.env.PORT || 3000
 
-app.get("/get_todo", (req, res) => {
+app.get("/", (req, res) => {
     try {
         res.send(todos.getTodos())
     } catch (err) {
@@ -18,7 +18,7 @@ app.get("/get_todo", (req, res) => {
     }
 })
 
-app.post("/add_todo", (req, res) => {
+app.post("/", (req, res) => {
     try {
         const data = req.body
         res.send(todos.addTodos(data));
@@ -27,9 +27,10 @@ app.post("/add_todo", (req, res) => {
     }
 })
 
-app.delete('/delete_todo/:id', (req, res) => {
+app.delete('/:Id', (req, res) => {
     try {
-        const { id } = req.params
+        const  id  = req.params.Id
+        console.log(id)
         res.status(200).send(todos.deleteTodo(id));
     } catch (err) {
         res.status(404).send("ID Not Found");
@@ -37,7 +38,7 @@ app.delete('/delete_todo/:id', (req, res) => {
 })
 
 
-app.put("/update_todo", (req, res) => {
+app.put("/", (req, res) => {
     try {
         const { todo } = req.body
         res.send(todos.putTodo(todo));
